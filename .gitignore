@@ -1,0 +1,7 @@
+*test
+*.o
+flash_cards
+libclib.a
+caps.txt
+dictionary.txt
+anotherdict.txt
