@@ -14,7 +14,7 @@ int rand_node_level()
 
 	if(!seeded)
 	{
-		/*srand((unsigned) time(NULL));*/
+		srand((unsigned) time(NULL));
 		seeded = 1;
 	}
 
