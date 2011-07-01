@@ -166,31 +166,23 @@ int string_cmp(string *a, string *b)
 	int ia;
 	int ib;
 
-	/* Handling cases where one of the strings could be empty. */
-	if(a->len == 0 && b->len == 0)
-		return 0;
-	else if(a->len == 0)
-		return -1;
-	else if(b->len == 0)
-		return 1;
+	int lena;
+	int lenb;
 
-	for(ia = ib = 0; ia < a->len && ib < b->len; ++ia, ++ib)
-		if(a->str[ia] != b->str[ib])
-			break;
+	char *stra;
+	char *strb;
 
-	/* If loop broken because we hit the end of b, a is
-	 * greater. Similar logic for b. */
-	if(ia < a->len && ib == b->len)
-		return 1;
-	else if(ib < b->len && ia == a->len)
-		return -1;
-	
-	if(ia == ib && ib == a->len)
-		return 0;
-	else if(a->str[ia] > b->str[ib])
-		return 1;
-	else
-		return -1;
+	lena = a->len;
+	lenb = b->len;
+
+	stra = a->str;
+	strb = b->str;
+
+	for(ia = ib = 0; ia < lena && ib < lenb; ++ia, ++ib)
+		if(*stra++ != *strb++)
+			return (*--stra) - (*--strb);
+
+	return lena - lenb;
 }
 
 string* string_cat(string *a, string *b)

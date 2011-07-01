@@ -30,6 +30,9 @@ queue.o: queue.c queue.h llist.c llist.h
 string_test: string_test.c string.o
 	$(CC) $(CFLAGS) -o string_test string_test.c string.o
 
+string_cmp_test: string_cmp_test.c string.o
+	$(CC) $(CFLAGS) -o string_cmp_test string_cmp_test.c string.o
+
 llist_test: llist_test.c llist.o string.o
 	$(CC) $(CFLAGS) -o llist_test llist_test.c llist.o string.o
 
@@ -49,4 +52,4 @@ flash_cards: flash_cards.c map.o vector.o pair.o skip_list.o string.o
 	$(CC) $(CFLAGS) -o flash_cards flash_cards.c map.o pair.o skip_list.o string.o vector.o
 
 clean:
-	rm -rf *.o string_test llist_test skip_list_test map_test vector_test queue_test flash_cards
+	rm -rf *.o string_cmp_test string_test llist_test skip_list_test map_test vector_test queue_test flash_cards
