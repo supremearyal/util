@@ -12,11 +12,9 @@ string* string_init()
 
 	s->cap = DEFAULT_STRING_CAPACITY;
 
-	/* The char* memory block is compatible as a cstring. Hence we
-	 * have one more space for the NULL terminator. */
 	s->str = malloc(sizeof(char) * s->cap);
 
-	if(!(s->str))
+	if(!s->str)
 	{
 		fprintf(stderr, "Insufficient memory.\n");
 		exit(EXIT_FAILURE);
@@ -180,14 +178,17 @@ int string_cmp(string *a, string *b)
 	stra = a->str;
 	strb = b->str;
 
-	if(len_diff)
-		return len_diff;
-
 	for(ia = ib = 0; ia < lena && ib < lenb; ++ia, ++ib)
 		if(*stra++ != *strb++)
 			return (*--stra) - (*--strb);
 
-	return len_diff;
+	if(ia == lena && ib == lenb)
+		return 0;
+
+	if(ia == lena)
+		return -1;
+
+	return 1;
 }
 
 string* string_cat(string *a, string *b)
