@@ -166,14 +166,12 @@ int string_cmp(string *a, string *b)
 
 	int lena;
 	int lenb;
-	int len_diff;
 
 	char *stra;
 	char *strb;
 
 	lena = a->len;
 	lenb = b->len;
-	len_diff = lena - lenb;
 
 	stra = a->str;
 	strb = b->str;
@@ -182,13 +180,7 @@ int string_cmp(string *a, string *b)
 		if(*stra++ != *strb++)
 			return (*--stra) - (*--strb);
 
-	if(ia == lena && ib == lenb)
-		return 0;
-
-	if(ia == lena)
-		return -1;
-
-	return 1;
+	return lena - lenb;
 }
 
 string* string_cat(string *a, string *b)

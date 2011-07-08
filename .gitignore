@@ -1,3 +1,4 @@
+*.swp
 *test
 *.o
 flash_cards
