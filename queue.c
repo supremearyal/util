@@ -10,8 +10,7 @@ queue* queue_init()
 		exit(EXIT_FAILURE);
 	}
 
-	q->head = llist_init();
-	q->tail = llist_init();
+	q->head = q->tail = 0;
 
 	return q;
 }
@@ -24,7 +23,7 @@ void queue_enqueue(queue *q, void *data)
 	l = llist_push(l, data);
 
 	/* If this is the first node, we have to set tail. */
-	if(!(q->tail))
+	if(!q->tail)
 	{
 		q->tail = l;
 	}
@@ -35,7 +34,7 @@ void queue_enqueue(queue *q, void *data)
 	}
 
 	/* If this is the first node, we have to set head. */
-	if(!(q->head))
+	if(!q->head)
 		q->head = q->tail;
 }
 
@@ -50,6 +49,10 @@ void* queue_dequeue(queue *q)
 		q->head = q->head->next;
 		v = h->data;
 		free(h);
+
+		/* If we've got no elements, tail needs to be set to NULL. */
+		if(!q->head)
+			q->tail = 0;
 
 		return v;
 	}
